@@ -3,12 +3,15 @@ package com.nanoleaf.sarah.sarahnanoleafinterview;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     numEachColour = Integer.parseInt(kTextInput.getText().toString());
                     totalLightbulbs = Integer.parseInt(iTextInput.getText().toString());
                     numToPick = Integer.parseInt(mTextInput.getText().toString());
-                    numSimulationRuns = Integer.parseInt(mTextInput.getText().toString());
+                    numSimulationRuns = Integer.parseInt(nTextInput.getText().toString());
 
                     // Check that total number matches the number of balls and number of colours
                     if (numColours * numEachColour != totalLightbulbs) {
@@ -112,15 +115,23 @@ public class MainActivity extends AppCompatActivity {
         int total = 0;
         // Hash set that will enforce uniqueness on the colours
         Set<Integer> currentColours = new HashSet<>();
+        List<Integer> startingLightbulbs = new ArrayList<>();
+        for (int i = 0; i < numColours; i++) {
+            for (int j = 0; j < numEachColour; j++) {
+                startingLightbulbs.add(i);
+            }
+        }
 
         // For each run of the simulation....
         for (int i = 0; i < numSimulationRuns; i++) {
+            List<Integer> currentLightbulbs = new ArrayList<>(startingLightbulbs);
             // For each pull out of the bag....
             for (int j = 0; j < numToPick; j++) {
                 Random r = new Random();
-                int randomNum = r.nextInt(totalLightbulbs);
-                int colourIndex = (int) randomNum/numEachColour;
+                int randomNum = r.nextInt(currentLightbulbs.size()-1);
+                int colourIndex = currentLightbulbs.get(randomNum);
                 currentColours.add(colourIndex);
+                currentLightbulbs.remove(randomNum);
             }
             // Add number of colours to the total
             total += currentColours.size();
@@ -128,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Calculate the average with decimals
+        Log.e("test", "Pick: " + numToPick);
+        Log.e("Test", "Total: " + total + " NumRuns: " + numSimulationRuns);
         final float average = (float) total / (float) numSimulationRuns;
 
         this.runOnUiThread(new Runnable() {
