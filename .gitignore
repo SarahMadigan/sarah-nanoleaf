@@ -1,4 +1,10 @@
+*.class
+/bin
+/gen
+local.properties
+
 *.iml
+.idea
 .gradle
 /local.properties
 /.idea/workspace.xml
