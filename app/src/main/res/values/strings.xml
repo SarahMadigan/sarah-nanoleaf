@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Sarah NanoLeaf Interview</string>
-    <string name="i_label">Total number of lightbulbs</string>
-    <string name="j_label">Number of colours</string>
-    <string name="k_label">Number of each colour</string>
-    <string name="m_label">Number of lightbulbs to pick</string>
-    <string name="n_label">Number of times to run the simulation</string>
-    <string name="submit">Submit</string>
-</resources>
