@@ -5,7 +5,6 @@ local.properties
 
 *.iml
 /.idea
-.gradle
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
