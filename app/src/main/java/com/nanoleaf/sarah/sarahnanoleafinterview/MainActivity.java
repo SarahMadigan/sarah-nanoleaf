@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 // Start running the simulation on another thread
-                                runSimulation(numEachColour, totalLightbulbs, numToPick, numSimulationRuns);
+                                runSimulation(numEachColour, numColours, numToPick, numSimulationRuns);
                             }
                         }).start();
 
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    void runSimulation(int numEachColour, int totalLightbulbs, int numToPick, int numSimulationRuns) {
+    void runSimulation(int numEachColour, int numColours, int numToPick, int numSimulationRuns) {
 
         int total = 0;
         // Hash set that will enforce uniqueness on the colours
@@ -139,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Calculate the average with decimals
-        Log.e("test", "Pick: " + numToPick);
-        Log.e("Test", "Total: " + total + " NumRuns: " + numSimulationRuns);
         final float average = (float) total / (float) numSimulationRuns;
 
         this.runOnUiThread(new Runnable() {
